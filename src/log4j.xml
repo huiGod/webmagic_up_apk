@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+        </layout>
+    </appender>
+
+  	<!-- 输出错误日志到文件 -->
+  	<appender name="file2"
+  		class="org.apache.log4j.FileAppender">
+  		<param name="File" value="/data/logs/webmaigc_i4.log"></param>
+  		<param name="Encoding" value="UTF-8" /> 
+  		<param name="Threshold" value="error"></param>
+  		<layout class="org.apache.log4j.PatternLayout">
+  			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} ] -%m%n"></param>
+  			<!-- <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param> -->
+  		</layout>
+  	</appender>
+  	
+  	 <!-- 输出定时日志到文件 -->
+  	<appender name="quartzlog"
+  		class="org.apache.log4j.FileAppender">
+  		<param name="File" value="/data/logs/webmaigc_i4_quartz.log"></param>
+  		<param name="Encoding" value="UTF-8" /> 
+  		<param name="Threshold" value="info"></param>
+  		<layout class="org.apache.log4j.PatternLayout">
+  			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} ] -%m%n"></param>
+  			<!-- <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param> -->
+  		</layout>
+  	</appender>
+  	
+  	<!--设置包的输出级别为INFO-->  
+  	<category name="com.ai.quartz">
+        <priority value="info" />
+        <appender-ref ref="quartzlog" />
+    </category>
+    
+    <!-- com.ai.spider -->   
+    <category name="com.ai">
+        <priority value="error" />
+        <appender-ref ref="file2" />
+    </category>
+    
+    <logger name="org.apache" additivity="false">
+        <level value="warn" />
+        <appender-ref ref="stdout" />
+        <appender-ref ref="file2" />
+    </logger>
+	
+    <root>
+        <level value="info" />
+        <appender-ref ref="stdout" />
+        <appender-ref ref="file2" />
+    </root>
+
+</log4j:configuration>

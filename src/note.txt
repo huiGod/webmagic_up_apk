@@ -1,0 +1,7 @@
+备注说明
+ 1、抓取数据优先从360抓取（360图片清晰）
+ 2、抓取qq列表的包名到360去抓取，没有找到apk的才从qq里边去抓取
+ 3、抓取apk需要过滤掉商城的合作、推荐包。
+ 
+ 运行说明：
+   定时运行QuartzUtil_updatelist，QuartzUtil_down，QuartzUtil_uploadfile
